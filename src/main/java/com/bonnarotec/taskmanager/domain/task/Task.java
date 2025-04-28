@@ -1,5 +1,6 @@
-package com.bonnarotec.taskmanager.domain.tasks;
+package com.bonnarotec.taskmanager.domain.task;
 
+import com.bonnarotec.taskmanager.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,8 @@ import java.util.UUID;
 
 @Entity()
 @Table(name = "tasks")
-@SQLDelete(sql = "UPDATE tasks SET deleted_at = true WHERE id=?")
-@SQLRestriction("deleted_at=null")
+@SQLDelete(sql = "UPDATE tasks SET deleted_at = CURRENT_TIMESTAMP WHERE id=?")
+@SQLRestriction("deleted_at IS NULL")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +23,10 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     private String name;

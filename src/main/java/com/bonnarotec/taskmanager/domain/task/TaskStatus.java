@@ -1,4 +1,4 @@
-package com.bonnarotec.taskmanager.domain.tasks;
+package com.bonnarotec.taskmanager.domain.task;
 
 import lombok.Getter;
 

@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: taskmanager
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: guest
+    password: guest
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: email, profile
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope: user:email, read:user
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400
